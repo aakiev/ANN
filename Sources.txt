@@ -1,0 +1,5 @@
+References for how to process data in the language R:
+
+- tsrobprep — an R package for robust preprocessing of time series data
+- Comparison of different Methods for Univariate Time Series Imputation in R
+

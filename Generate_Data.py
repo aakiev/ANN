@@ -109,7 +109,7 @@ plt.legend()
 plt.show()
 
 # Daten speichern
-# df.to_csv("simulated_machine_data_realistic.csv")
+df.to_csv("simulated_machine_data_realistic.csv")
 
 # Visualisierung aufteilen
 plt.figure(figsize=(14, 15))
