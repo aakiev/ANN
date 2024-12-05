@@ -4,7 +4,8 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.ensemble import IsolationForest
 from scipy.signal import butter, filtfilt
 
-# --- Step 1: Load the dataset ---
+
+# --- Step 0: Load the dataset ---
 
 # Load the dataset and set the timestamp as the index
 df = pd.read_csv("simulated_machine_data_realistic.csv", index_col="Timestamp", parse_dates=True)
@@ -12,6 +13,18 @@ df = pd.read_csv("simulated_machine_data_realistic.csv", index_col="Timestamp", 
 # Display the initial structure of the dataset
 print("Initial Data:")
 print(df.head())
+
+# --- Step 1: Remove rows where RPM or Vibration is zero ---
+
+# Initial row count
+initial_row_count = len(df)
+
+# Filter out rows where RPM or Vibration is 0
+df = df[(df["RPM"] != 0) & (df["Vibration"] != 0)]
+
+# Rows removed
+filtered_row_count = len(df)
+print(f"Rows removed where RPM or Vibration = 0: {initial_row_count - filtered_row_count}")
 
 # --- Step 2: Handle Missing Values ---
 
@@ -67,15 +80,19 @@ print(df.isnull().sum())
 # Remove any remaining NaN values
 df.dropna(inplace=True)
 
-# --- Step 6: Detect Anomalies with Isolation Forest ---
+# --- Step 6: Multivariate Anomaly Detection with Isolation Forest ---
 
-# Apply Isolation Forest for anomaly detection
-iso = IsolationForest(contamination=0.01, random_state=42)
-df['Anomaly'] = iso.fit_predict(df)
+# Select relevant features for anomaly detection
+features = df[['Temperature', 'RPM', 'Vibration']]  # Add more columns if relevant
+
+# Apply Isolation Forest
+iso = IsolationForest(contamination=0.008, random_state=42)  # best result with this contamination
+df['Anomaly'] = iso.fit_predict(features)
 
 # Display detected anomalies
-print("\nAnomalies Detected:")
+print("\nAnomalies Detected (Multivariate):")
 print(df[df['Anomaly'] == -1])
+
 
 # --- Step 7: Filter High-Frequency Noise ---
 
