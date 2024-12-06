@@ -51,7 +51,7 @@ plot_data(
 # Plot anomalies (highlight anomalous points)
 plt.figure(figsize=(14, 7))
 plt.plot(df.index, df["Temperature"], label="Temperature", alpha=0.7)
-anomalies = df[df["Anomaly"] == -1]
+anomalies = df[df["Anomaly"] == 1]
 plt.scatter(anomalies.index, anomalies["Temperature"], color="red", label="Anomalies", s=50)
 plt.title("Temperature with Anomalies Highlighted")
 plt.xlabel("Timestamp")
