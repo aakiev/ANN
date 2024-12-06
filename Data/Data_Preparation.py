@@ -4,11 +4,10 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.ensemble import IsolationForest
 from scipy.signal import butter, filtfilt
 
-
 # --- Step 0: Load the dataset ---
 
 # Load the dataset and set the timestamp as the index
-df = pd.read_csv("simulated_machine_data_realistic.csv", index_col="Timestamp", parse_dates=True)
+df = pd.read_csv("CSV Files/simulated_machine_data_realistic.csv", index_col="Timestamp", parse_dates=True)
 
 # Display the initial structure of the dataset
 print("Initial Data:")
@@ -86,13 +85,15 @@ df.dropna(inplace=True)
 features = df[['Temperature', 'RPM', 'Vibration']]  # Add more columns if relevant
 
 # Apply Isolation Forest
-iso = IsolationForest(contamination=0.008, random_state=42)  # best result with this contamination
+iso = IsolationForest(contamination=0.008, random_state=42)  # Best result with this contamination
 df['Anomaly'] = iso.fit_predict(features)
+
+# Replace Isolation Forest output with binary values: 1 for anomalies, 0 for normal data
+df['Anomaly'] = df['Anomaly'].apply(lambda x: 1 if x == -1 else 0)
 
 # Display detected anomalies
 print("\nAnomalies Detected (Multivariate):")
-print(df[df['Anomaly'] == -1])
-
+print(df[df['Anomaly'] == 1])
 
 # --- Step 7: Filter High-Frequency Noise ---
 
@@ -113,5 +114,5 @@ for col in df.columns:
 # --- Step 8: Save the Processed Data ---
 
 # Save the processed DataFrame to a new CSV file
-df.to_csv("processed_machine_data.csv")
+df.to_csv("CSV Files/processed_machine_data.csv")
 print("\nProcessed Data Saved to 'processed_machine_data.csv'")

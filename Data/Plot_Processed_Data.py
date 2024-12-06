@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the processed data
-df = pd.read_csv("processed_machine_data.csv", index_col="Timestamp", parse_dates=True)
+df = pd.read_csv("CSV Files/processed_machine_data.csv", index_col="Timestamp", parse_dates=True)
 
 # Define a plotting function for cleaner code
 def plot_data(df, columns, title, ylabel):

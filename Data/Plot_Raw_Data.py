@@ -2,7 +2,7 @@ import pandas as pd # type: ignore
 import numpy as np
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("simulated_machine_data_realistic.csv")
+df = pd.read_csv("CSV Files/simulated_machine_data_realistic.csv")
 
 # Daten visualisieren
 plt.figure(figsize=(14, 10))
