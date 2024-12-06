@@ -3,3 +3,9 @@ References for how to process data in the language R:
 - tsrobprep — an R package for robust preprocessing of time series data
 - Comparison of different Methods for Univariate Time Series Imputation in R
 
+<----------------------------------------------------------------------------------->
+
+How to build a Random Forest Classifier in Python:
+
+Prashant Banerjee - Random Forest Classifier Tutorial (Jupyter Notebook)
+- Link: https://www.kaggle.com/code/prashant111/random-forest-classifier-tutorial/notebook
