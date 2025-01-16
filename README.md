@@ -84,11 +84,6 @@ Train and test anomaly detection and forecasting models on the processed data. E
 - Expand the dataset to include more complex scenarios and dependencies.
 - Automate the pipeline for end-to-end processing.
 
-## Contribution
-Contributions are welcome! Feel free to fork the repository, make changes, and submit pull requests to enhance functionality or optimize the existing codebase.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 
